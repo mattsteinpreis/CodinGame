@@ -51,3 +51,11 @@ ROTATIONS = {
     (13, 'R'): 10,
     (13, 'L'): 12
 }
+
+# get maze
+width, height = [int(i) for i in input().split()]
+matrix = []
+for line in range(height):
+    matrix.append([int(i) for i in input().split()])
+
+ex = int(input())  # unused for level 1
