@@ -1,0 +1,45 @@
+def groupify(l):
+    if len(l) < 3:
+        return l
+    groups = []
+    group = []
+    for n in l:
+        if not group:
+            group.append(n)
+        else:
+            if n == group[-1] + 1:
+                group.append(n)
+            else:
+                if len(group) < 3:
+                    for ni in group:
+                        groups.append(str(ni))
+                    group = [n]
+                else:
+                    groups.append("{}-{}".format(group[0], group[-1]))
+                    group = [n]
+    # finish up end
+    if len(group) < 3:
+        for n in group:
+            groups.append(str(n))
+    else:
+        groups.append("{}-{}".format(group[0], group[-1]))
+    return groups
+
+
+def test():
+    s = '1,5,2,6,7,9,12,55,56,57,58,60,61,62,64,65,70'
+    numbers = sorted([int(i) for i in s.split(',')])
+    simple_groups = groupify(numbers)
+    print(numbers)
+    print(groupify(numbers))
+    assert ','.join(simple_groups) == '1,2,5-7,9,12,55-58,60-62,64,65,70'
+
+
+def codingame():
+    numbers = sorted([int(a) for a in input()[1:-1].split(',')])
+    simple_groups = groupify(numbers)
+    print(','.join(simple_groups))
+
+
+if __name__ == "__main__":
+    codingame()
